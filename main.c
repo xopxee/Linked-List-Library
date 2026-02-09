@@ -3,23 +3,18 @@
 #include "linked_list.h"
 
 int main(){
-	clock_t inicio = clock();
 	
-	linked_list* l = create_linked_list();
+	node* l;
+	init_linked_list(&l);
 	
-	for(int i = 1; i <= 100000; i++){
-		create_node(l, i*13);
-	}
+	insert_node(&l, 1);
+	insert_node(&l, 3);
+	insert_node(&l, -7);
+	insert_node(&l, 3);
+	insert_node(&l, 2);
 	
-	delete_linked_list(l);
-	
-	print_nodes(l);  
-	
-	clock_t fim = clock();
-	
-	double tempo = ((double)fim - inicio)/CLOCKS_PER_SEC;
-	
-	printf("Tempo de execucao: %f segundos\n", tempo);
-	
+	print_nodes(l);
+
+	delete_linked_list(&l);
 	return 0;
 }

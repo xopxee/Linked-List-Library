@@ -3,24 +3,20 @@
 
 #include <stdlib.h>
 
-typedef struct{
+struct node{
 	int num;
-	void* next;
+	struct node* next;
 	
-}node;
+};
 
-typedef struct{
-	node* first_node;
-	size_t nel;
-	
-}linked_list;
+typedef struct node node;
 
-linked_list* create_linked_list();
+void init_linked_list(node** l);
 
-void  delete_linked_list(linked_list* l);
+void  delete_linked_list(node** ll);
 
-void create_node(linked_list* l, int num);
+void insert_node(node** ll, int num);
 
-void print_nodes(linked_list* l);
+void print_nodes(node* l);
 
 #endif

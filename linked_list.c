@@ -1,89 +1,63 @@
 #include <stdio.h>
 #include "linked_list.h"
 
-linked_list* create_linked_list(){
+void init_linked_list(node** ll){
 	
-	//Aloca espaco para a lista.
-	linked_list* l = (linked_list*)malloc(sizeof(linked_list*));
+	//Inicializa a lista como vazia.
+	*ll = NULL;
+}
+
+void  delete_linked_list(node** ll){
 	
-	if(l == NULL){
+	node* aux;
+	
+	for(aux = *ll; aux != NULL;){//Enquanto houver nós.
+		
+		//Guarda o endereço do nó a ser deletado.
+		node* current_node = aux;
+		
+		//current aponta pro próximo nó.
+		aux = aux->next;
+		
+		//deleta o nó atual.
+		free(current_node);
+	}
+	
+	*ll = NULL;
+}
+
+void insert_node(node** ll, int num){
+	
+	//Cria novo nó a ser inserido na lista.
+	node* new_node = (node*)malloc(sizeof(node));
+	
+	if(new_node == NULL){
 		perror("Falha ao alocar memoria!");
 		exit(1);
 	}
 	
-	//Inicializa campos.
-	l->first_node = NULL;
-	l->nel = 0;
-	
-	return l;
-}
-
-void  delete_linked_list(linked_list* l){
-	
-	//Primeiro nó.
-	node* current_node = l->first_node;
-	
-	//Enquanto houver nós, desaloque - os.
-	while(current_node != NULL){
-		
-		//Guarda o endereco do proximo nó, antes de destruir o atual.
-		node* next_node = current_node->next;
-		
-		free(current_node);
-		
-		current_node = next_node;
-	}
-	
-	free(l);
-}
-
-void create_node(linked_list* l, int num){
+	//Preenche novo nó.
+	new_node->num  = num;
 	
 	//Se a lista esta vazia
-	if(l->nel == 0){
-		
-		l->first_node = (node*)malloc(sizeof(node));
-		
-		if(l->first_node == NULL){
-			perror("Falha ao alocar memoria!");
-			exit(1);
-		}
-		l->first_node->num = num;
-		l->first_node->next = NULL;
-		l->nel++;
-		
-		return;
+	if(*ll == NULL){
+		new_node->next = NULL;	//Novo nó é o ultimo e o primeiro nó.
+	}
+	else{
+		new_node->next = *ll;	//Insere o novo elemento na primeira posicao.
 	}
 	
-	node* current_node = l->first_node;
-	
-	//Procura ultimo nó da lista.
-	while(current_node->next != NULL){
-		current_node = current_node->next;
-	}
-	
-	//Aloca proximo nó e guarda o numero passado no argumento.
-	current_node->next = malloc(sizeof(node));
-	
-	node* next_node = current_node->next;
-	
-	next_node->num = num;
-	next_node->next = NULL;
-	l->nel++;
+	*ll = new_node;				//Lista aponta para o novo nó.
 }
 
-void print_nodes(linked_list* l){
+void print_nodes(node* l){
 	
-	if(l->nel == 0)
+	if(l == NULL)
 		return;
 	
-	node* current_node = l->first_node;
-	
 	//Printa ate o ultimo nó.
-	while(current_node != NULL){
-		printf("%d ", current_node->num);
-		
-		current_node = current_node->next;
+	for(node* aux = l; aux != NULL; aux = aux->next){
+		printf("%d ", aux->num);
 	}
 	printf("\n");
 	
