@@ -1,34 +1,35 @@
 #include <stdio.h>
 #include "linked_list.h"
 
-void init_linked_list(node** ll){
+void init_linked_list(node** pl){
 	
-	//Inicializa a lista como vazia.
-	*ll = NULL;
+	//Initialiazes the list as empty.
+	*pl = NULL;
 }
 
-void  delete_linked_list(node** ll){
+void  delete_linked_list(node** pl){
 	
+	//Variable that will iterate through all of the nodes in the list.
 	node* aux;
 	
-	for(aux = *ll; aux != NULL;){//Enquanto houver nós.
+	for(aux = *pl; aux != NULL;){//While there are nodes left.
 		
-		//Guarda o endereço do nó a ser deletado.
+		//Stores the address of the node to be deleted.
 		node* current_node = aux;
 		
-		//current aponta pro próximo nó.
+		//aux points to the next node.
 		aux = aux->next;
 		
-		//deleta o nó atual.
 		free(current_node);
 	}
 	
-	*ll = NULL;
+	//Sets the list to be empty again.
+	*pl = NULL;
 }
 
-void insert_node(node** ll, int num){
+void shift_node(node** pl, int num){
 	
-	//Cria novo nó a ser inserido na lista.
+	//Allocates memory for the new node to be inserted.
 	node* new_node = (node*)malloc(sizeof(node));
 	
 	if(new_node == NULL){
@@ -36,29 +37,64 @@ void insert_node(node** ll, int num){
 		exit(1);
 	}
 	
-	//Preenche novo nó.
+	//Fills the node with the data passed in the arguments.
 	new_node->num  = num;
 	
-	//Se a lista esta vazia
-	if(*ll == NULL){
-		new_node->next = NULL;	//Novo nó é o ultimo e o primeiro nó.
-	}
-	else{
-		new_node->next = *ll;	//Insere o novo elemento na primeira posicao.
+	//new_node points to the first node (or NULL in case of empty lists).
+	new_node->next = *pl;	
+	
+	//new_node is now the first node.
+	*pl = new_node;				
+}
+
+void remove_node(node** pl, int num){
+	
+	if(is_empty(*pl))
+		return;
+	
+	node* aux;
+	node* previous;
+	
+	//Stops only if the targeted data was found or the end of the list was reached. 
+	for(aux = *pl;  aux->next != NULL, 
+					aux->num != num;	aux = aux->next){
+		
+		//previous will point to the node before aux 
+		//(aux is going to be incremented before the end of the loop).
+		previous = aux;
 	}
 	
-	*ll = new_node;				//Lista aponta para o novo nó.
+	//Checks which was the stop condition of the for loop.
+	if(aux->num == num){
+		
+		//If aux is the head of the list.
+		if(aux == *pl){
+			
+			//The head now point to the next node.
+			*pl = aux->next;
+			free(aux);
+			return;
+		}
+		//Makes the previous node point one node ahead before freeing aux.
+		previous->next = aux->next;
+		free(aux);
+	}
+}
+
+bool is_empty(node* l){
+	return (l == NULL) ? true : false;
 }
 
 void print_nodes(node* l){
 	
 	if(l == NULL)
-		return;
+		printf("{}\n");
 	
-	//Printa ate o ultimo nó.
+	printf("{ ");
+	//Prints 'til the last node.
 	for(node* aux = l; aux != NULL; aux = aux->next){
 		printf("%d ", aux->num);
 	}
-	printf("\n");
+	printf("}\n");
 	
 }

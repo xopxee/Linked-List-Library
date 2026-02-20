@@ -2,21 +2,32 @@
 #define LINKED_LIST_H
 
 #include <stdlib.h>
-
-struct node{
-	int num;
-	struct node* next;
-	
-};
+#include <stdbool.h>
 
 typedef struct node node;
 
+struct node{
+	int num;
+	node* next;
+	
+};
+
+//Initializes the list.
 void init_linked_list(node** l);
 
-void  delete_linked_list(node** ll);
+//'Deletes' the data within the list by freeing the memory from all of the nodes.
+void  delete_linked_list(node** pl);
 
-void insert_node(node** ll, int num);
+//Inserts a new node at the start of the list.
+void shift_node(node** pl, int num);
 
+//Searches for the first node with compatible data and then deletes it.
+void remove_node(node** pl, int num);
+
+//Checks if the list doesn´t contain any nodes.
+bool is_empty(node* l);
+
+//Prints all the nodes within the list.
 void print_nodes(node* l);
 
 #endif

@@ -7,11 +7,16 @@ int main(){
 	node* l;
 	init_linked_list(&l);
 	
-	insert_node(&l, 1);
-	insert_node(&l, 3);
-	insert_node(&l, -7);
-	insert_node(&l, 3);
-	insert_node(&l, 2);
+	shift_node(&l, 1);
+	shift_node(&l, 3);
+	shift_node(&l, -7);
+	shift_node(&l, 3);
+	shift_node(&l, 2);
+	
+	print_nodes(l);
+	
+	remove_node(&l, 2);
+	remove_node(&l, 1);
 	
 	print_nodes(l);
 
