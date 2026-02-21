@@ -92,6 +92,34 @@ void push_node(node** pl, int num){
 	
 }
 
+int pop_node(node** pl){
+	
+	if(is_empty(*pl)){
+		perror("List is empty");
+		exit(1);
+	}
+	
+	node* aux;		//Will store the address of the last node.
+	node* previous;	//Will store the address of the previous node.
+	
+	//Stops at the last node.
+	for(aux = *pl; aux->next != NULL; aux = aux->next)
+		previous = aux; 
+	
+	//Stores the data to be returned.
+	int num = aux->num;
+	
+	if(aux == *pl){
+		*pl = NULL;
+	}
+	else{
+		previous->next = NULL;
+	}
+	free(aux);
+	
+	return num;
+}
+
 void remove_node(node** pl, int num){
 	
 	if(is_empty(*pl))

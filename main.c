@@ -12,8 +12,8 @@ int main(){
 	
 	print_nodes(l);
 	
-	for(int i = 0; i < 10; i++)
-		printf("%d\n", unshift_node(&l));
+	for(int i = 0; i < 7; i++)
+		printf("%d\n", pop_node(&l));
 	
 	print_nodes(l);
 	
