@@ -47,6 +47,34 @@ void shift_node(node** pl, int num){
 	*pl = new_node;				
 }
 
+void push_node(node** pl, int num){
+	
+	//Initialiazes the node and its data.
+	
+	node* new_node = (node*)malloc(sizeof(node));
+	
+	if(new_node == NULL){
+		perror("Falha ao alocar memoria!");
+		exit(1);
+	}
+	new_node->num = num;
+	new_node->next = NULL;
+	
+	if(is_empty(*pl)){
+		*pl = new_node;
+	}
+	else{
+		node* aux;
+		
+		//Stops when there are no nodes next.
+		for(aux = *pl; aux->next != NULL; aux = aux->next);
+		
+		//The last node now points to new_node
+		aux->next = new_node;
+	}
+	
+}
+
 void remove_node(node** pl, int num){
 	
 	if(is_empty(*pl))
@@ -56,7 +84,7 @@ void remove_node(node** pl, int num){
 	node* previous;
 	
 	//Stops only if the targeted data was found or the end of the list was reached. 
-	for(aux = *pl;  aux->next != NULL, 
+	for(aux = *pl;  aux->next != NULL &&
 					aux->num != num;	aux = aux->next){
 		
 		//previous will point to the node before aux 
@@ -87,8 +115,10 @@ bool is_empty(node* l){
 
 void print_nodes(node* l){
 	
-	if(l == NULL)
+	if(l == NULL){
 		printf("{}\n");
+		return;
+	}
 	
 	printf("{ ");
 	//Prints 'til the last node.

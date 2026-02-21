@@ -12,6 +12,8 @@ struct node{
 	
 };
 
+//Unshift, push, pop
+
 //Initializes the list.
 void init_linked_list(node** l);
 
@@ -20,6 +22,9 @@ void  delete_linked_list(node** pl);
 
 //Inserts a new node at the start of the list.
 void shift_node(node** pl, int num);
+
+//Inserts a new node at the end of the list.
+void push_node(node** pl, int num);
 
 //Searches for the first node with compatible data and then deletes it.
 void remove_node(node** pl, int num);
