@@ -23,6 +23,9 @@ void  delete_linked_list(node** pl);
 //Inserts a new node at the start of the list.
 void shift_node(node** pl, int num);
 
+//Removes the first node and return its data.
+int unshift_node(node** pl);
+
 //Inserts a new node at the end of the list.
 void push_node(node** pl, int num);
 

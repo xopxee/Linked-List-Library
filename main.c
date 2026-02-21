@@ -2,45 +2,22 @@
 #include <time.h>
 #include "linked_list.h"
 
-#define NUMS 100000
-
 int main(){
 	
-	node* lpush;
-	init_linked_list(&lpush);
+	node* l;
+	init_linked_list(&l);
 	
-	node* lshift;
-	init_linked_list(&lshift);
+	for(int i = 0; i < 10; i++)
+		shift_node(&l, i);
 	
-	clock_t inicio, fim;
+	print_nodes(l);
 	
-	inicio = clock();
+	for(int i = 0; i < 10; i++)
+		printf("%d\n", unshift_node(&l));
 	
-	for(int i = 0; i < NUMS; i++)
-		push_node(&lpush, i);
+	print_nodes(l);
 	
-	fim = clock();
-	double push_time = ((double)fim - inicio)/CLOCKS_PER_SEC;
+	delete_linked_list(&l);
 	
-	print_nodes(lpush);
-	
-	inicio = clock();
-	
-	for(int i = 0; i < NUMS; i++)
-		shift_node(&lshift, i);
-	
-	fim = clock();
-	double shift_time = ((double)fim - inicio)/CLOCKS_PER_SEC;
-	
-	print_nodes(lshift);
-	
-	printf("\nTempo de push: %f seg\n", push_time);
-	printf("\nTempo de shift: %f seg\n", shift_time);
-	
-	printf( "\nShiftar eh cerca de %.2f" 
-			" vezes mais rapido que pushar\n", push_time/shift_time);
-
-	delete_linked_list(&lpush);
-	delete_linked_list(&lshift);
 	return 0;
 }

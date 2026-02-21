@@ -33,7 +33,7 @@ void shift_node(node** pl, int num){
 	node* new_node = (node*)malloc(sizeof(node));
 	
 	if(new_node == NULL){
-		perror("Falha ao alocar memoria!");
+		perror("Failed to allocate memory!");
 		exit(1);
 	}
 	
@@ -47,6 +47,23 @@ void shift_node(node** pl, int num){
 	*pl = new_node;				
 }
 
+int unshift_node(node** pl){
+	
+	if(is_empty(*pl)){
+		perror("List is empty");
+		exit(1);
+	}
+	
+	//Stores the address of the first node, and moves the head of the list ahead.
+	node* aux = *pl;
+	*pl = aux->next;
+	
+	//Gets the data within aux node before deleting it.
+	int num = aux->num;
+	free(aux);
+	return num;
+}
+
 void push_node(node** pl, int num){
 	
 	//Initialiazes the node and its data.
@@ -54,7 +71,7 @@ void push_node(node** pl, int num){
 	node* new_node = (node*)malloc(sizeof(node));
 	
 	if(new_node == NULL){
-		perror("Falha ao alocar memoria!");
+		perror("Failed to allocate memory!");
 		exit(1);
 	}
 	new_node->num = num;
