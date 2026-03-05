@@ -12,8 +12,6 @@ struct node{
 	
 };
 
-//pop
-
 //Initializes the list.
 void init_linked_list(node** l);
 
@@ -36,7 +34,7 @@ int pop_node(node** pl);
 void remove_node(node** pl, int num);
 
 //Checks if the list doesn´t contain any nodes.
-bool is_empty(node* l);
+bool is_empty_ll(node* l);
 
 //Prints all the nodes within the list.
 void print_nodes(node* l);

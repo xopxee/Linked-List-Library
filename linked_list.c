@@ -9,6 +9,9 @@ void init_linked_list(node** pl){
 
 void  delete_linked_list(node** pl){
 	
+	if(is_empty_ll(*pl))
+		return;
+	
 	//Variable that will iterate through all of the nodes in the list.
 	node* aux;
 	
@@ -49,7 +52,7 @@ void shift_node(node** pl, int num){
 
 int unshift_node(node** pl){
 	
-	if(is_empty(*pl)){
+	if(is_empty_ll(*pl)){
 		perror("List is empty");
 		exit(1);
 	}
@@ -77,7 +80,7 @@ void push_node(node** pl, int num){
 	new_node->num = num;
 	new_node->next = NULL;
 	
-	if(is_empty(*pl)){
+	if(is_empty_ll(*pl)){
 		*pl = new_node;
 	}
 	else{
@@ -94,7 +97,7 @@ void push_node(node** pl, int num){
 
 int pop_node(node** pl){
 	
-	if(is_empty(*pl)){
+	if(is_empty_ll(*pl)){
 		perror("List is empty");
 		exit(1);
 	}
@@ -122,7 +125,7 @@ int pop_node(node** pl){
 
 void remove_node(node** pl, int num){
 	
-	if(is_empty(*pl))
+	if(is_empty_ll(*pl))
 		return;
 	
 	node* aux;
@@ -154,7 +157,7 @@ void remove_node(node** pl, int num){
 	}
 }
 
-bool is_empty(node* l){
+bool is_empty_ll(node* l){
 	return (l == NULL) ? true : false;
 }
 
