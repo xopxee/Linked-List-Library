@@ -2,7 +2,7 @@ CC = gcc
 LDFLAGS = 
 TARGET = main
 HEADERS = linked_list.h
-SOURCES = linked_list.c main.c  
+SOURCES = linked_list.c main.c
 DEPENDENCIES = $(SOURCES) $(HEADERS)
 
 all: $(TARGET)

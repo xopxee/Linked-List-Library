@@ -157,6 +157,113 @@ void remove_node(node** pl, int num){
 	}
 }
 
+size_t get_len_ll(node* l){
+	
+	if(is_empty_ll(l)){
+		return 0;
+	}
+	
+	//Iterates through all of the nodes and incrementes the
+	//counter at each iteration.
+	size_t len = 0;
+	for(node* aux = l; aux != NULL; aux = aux->next)
+		len++;
+	
+	return len;
+}
+
+size_t n_higher_ll(node* l, int num){
+	
+	if(is_empty_ll(l)){
+		return 0;
+	}
+	
+	//Iterates through all of the nodes and checks if the integer
+	//contained inside of each is higher than 'num', and increments
+	//'counter' if that's the case.
+	size_t counter = 0;
+	for(node* aux = l; aux != NULL; aux = aux->next){
+		
+		if(aux->num > num)
+			counter++;
+	}
+	
+	return counter;
+}
+
+node* last_node(node* l){
+	
+	if(is_empty_ll(l)){
+		return NULL;
+	}
+	
+	//Iterates through the list list 'til it finds the last node.
+	node* aux;
+	for(aux = l; aux->next != NULL; aux = aux->next);
+	
+	return aux;
+}
+
+node* concat_ll(node* li, node* lf){
+	
+	if(is_empty_ll(li)){
+		return lf;
+	}
+	
+	if(is_empty_ll(lf)){
+		return li;
+	}
+	
+	//Concatenates by linking the last node from the first list
+	//to the first node of the second list.
+	last_node(li)->next = lf;
+	return li;
+}
+
+node* remove_all_num(node** pl, int num){
+	
+	if(is_empty_ll(*pl)){
+		return NULL;
+	}
+	
+	bool contains_num = false;
+	
+	for(node* aux = *pl; aux != NULL; aux = aux->next){
+		
+		if(aux->num == num){
+			contains_num = true;
+			break;
+		}
+	}
+	
+	//Performance-wise this function is terrible but idc.
+	if(contains_num){
+		remove_node(pl, num);
+		remove_all_num(pl, num);
+	}
+	else{
+		return *pl;
+	}
+}
+
+node* slice_ll(node** pl, int num){
+	
+	if(is_empty_ll(*pl)){
+		return NULL;
+	}
+	
+	node* aux;
+	for(aux = *pl; aux != NULL; aux = aux->next){
+		
+		if(aux->num == num){
+			node* new_list = aux->next;
+			aux->next = NULL;
+			return new_list;
+		}
+	}
+	return NULL;
+}
+
 bool is_empty_ll(node* l){
 	return (l == NULL) ? true : false;
 }

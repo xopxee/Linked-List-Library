@@ -7,15 +7,15 @@ int main(){
 	node* l;
 	init_linked_list(&l);
 	
-	for(int i = 0; i < 10; i++)
-		shift_node(&l, i);
+	for(int i = 0; i < 10; i ++)
+		push_node(&l, (int)i);
 	
 	print_nodes(l);
 	
-	for(int i = 0; i < 7; i++)
-		printf("%d\n", pop_node(&l));
+	node* nl = slice_ll(&l, 4);
 	
 	print_nodes(l);
+	print_nodes(nl);
 	
 	delete_linked_list(&l);
 	
